@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="/board/modify/{{posts.post_num}}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+
+            <h4 class="fw-bold py-3 mb-4" style="display: inline-block;"> Post Modify</h4>
+
+            <div style="display: inline-block;float:right">
+                <button type="submit" class="btn btn-warning">Save</button>
+                <button type="button" class="btn btn-danger" onClick="location.href='/board/delete/{{posts.post_num}}'">
+                    Delete
+                </button>
+                <button type="button" class="btn btn-primary"
+                        onClick="location.href='/board/detail/{{posts.post_num}}'">Cancel
+                </button>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-10">
+                        <div class="card-body" style="padding: 10px 24px 12px;">
+                            <!-- post -->
+                            {% if error_message %}
+                            <div class="alert alert-danger">{{ error_message }}</div>
+                            {% endif %}
+                            <div>
+                                <label for="title" class="form-label">Title</label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                        id="title"
+                                        name="title"
+                                        value="{{ posts.title }}">
+                                <div>
+                                    <label for="content" class="form-label">Content</label>
+                                    <textarea id="content"
+                                              class="form-control"
+                                              name="content"
+                                              rows="8"
+                                              cols="50">{{ posts.content }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- / Content -->
+
+
+        {% endblock content %}
+
+

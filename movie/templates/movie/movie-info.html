@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <h4 class="fw-bold py-3 mb-4" style="display: inline-block;"> Movie Info</h4>
+        {% if user.is_superuser %}
+        <div style="display: inline-block;float:right">
+
+            <button type="button" class="btn btn-warning"
+                    onClick="location.href='/movie/modify/{{movieInfo.movie_id}}'">Modify
+            </button>
+
+        </div>
+        {% endif %}
+        <div class="row">
+            <!-- Poster input -->
+            <div class="col-md-6">
+                <div class="card">
+                    <h5 class="card-header">Poster</h5>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <img class="card-img" src="{{movieInfo.poster.url}}" alt="Card image cap"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- poster input -->
+
+            <!-- information -->
+            <div class="col-md-6">
+                <div class="card mb-4">
+
+                    <h5 class="card-header">Information</h5>
+                    <input value="{{movieInfo.movie_id}}" hidden="hidden" readonly>
+                    <!-- 내용 -->
+                    <div class="card-body" style="padding: 0px 24px 12px;">
+                        <div>
+                            <label for="title" class="form-label">Movie Title</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="title"
+                                    name="title"
+                                    value="{{movieInfo.title}}"
+                                    aria-describedby="defaultFormControlHelp"
+                                    readonly
+                            />
+                        </div>
+                    </div>
+                    <!-- 내용 -->
+                    <!-- 내용 -->
+                    <div class="card-body" style="padding: 0px 24px 12px;">
+                        <div>
+                            <label for="director" class="form-label">Movie Director</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="director"
+                                    name="director"
+                                    value="{{movieInfo.director}}"
+                                    aria-describedby="defaultFormControlHelp"
+                                    readonly
+                            />
+                        </div>
+                    </div>
+                    <!-- 내용 -->
+                    <!-- 내용 -->
+                    <div class="card-body" style="padding: 0px 24px 12px;">
+                        <div>
+                            <label for="actors" class="form-label">Movie Actor</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="actors"
+                                    name="actors"
+                                    value="{{movieInfo.actors}}"
+                                    aria-describedby="defaultFormControlHelp"
+                                    readonly
+                            />
+                        </div>
+                    </div>
+                    <!-- 내용 -->
+                    <!-- 내용 -->
+                    <div class="card-body" style="padding: 0px 24px 12px;">
+                        <div>
+                            <label for="genre" class="form-label">Movie Genre</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="genre"
+                                    name="genre"
+                                    value="{{movieInfo.genre}}"
+                                    aria-describedby="defaultFormControlHelp"
+                                    readonly
+                            />
+                        </div>
+                    </div>
+                    <!-- 내용 -->
+                    <!-- 내용 -->
+                    <div class="card-body" style="padding: 0px 24px 12px;">
+                        <div>
+                            <label for="openingday" class="form-label">Opening Day</label>
+                            <input
+                                    type="date"
+                                    class="form-control"
+                                    id="openingday"
+                                    name="openingday"
+                                    value="{{movieInfo.openingday|date:'Y-m-d'}}"
+                                    aria-describedby="defaultFormControlHelp"
+                                    readonly
+                            />
+                        </div>
+                    </div>
+                    <!-- 내용 -->
+
+
+                </div>
+                <!--       별점           -->
+                <div class="card mb-4">
+
+                    <h5 class="card-header">Movie Rating</h5>
+                    <span class="area_decimal_star">
+                    <span class="area_bg_gray"> <span class="area_bg_red" style="width:{{movieRating}}%"></span> </span>
+                     </span>
+                    <a href="/movie/comment/{{movieInfo.movie_id}}" class="btn btn-outline-primary">Comment & Rating</a>
+                </div>
+            </div>
+            <!-- information -->
+
+            <!-- Trailer input -->
+            <div class="col-md-6">
+                <div class="card">
+                    <h5 class="card-header">Trailer</h5>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div style="position: relative; max-width: 100%; padding-bottom: 56.25%; height: 0;">
+                                <iframe width="640" height="360" src="{{movieInfo.trailer|safe}}" frameborder="0"
+                                        allowfullscreen=""
+                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Trailer input -->
+            <!-- Still Shot input -->
+            <div class="col-md-6">
+                <div class="card">
+                    <h5 class="card-header">Still Shot 1</h5>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <img class="card-img" src="{{movieInfo.stillshot1.url}}" alt="Card image cap"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Still Shot input -->
+            <!-- Still Shot input -->
+            <div class="col-md-6">
+                <div class="card">
+                    <h5 class="card-header">Still Shot 2</h5>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <img class="card-img" src="{{movieInfo.stillshot2.url}}" alt="Card image cap"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Still Shot input -->
+            <!-- Still Shot input -->
+            <div class="col-md-6">
+                <div class="card">
+                    <h5 class="card-header">Still Shot 3</h5>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <img class="card-img" src="{{movieInfo.stillshot3.url}}" alt="Card image cap"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Still Shot input -->
+
+
+        </div>
+    </div>
+</div>
+<!-- / Content -->
+
+
+{% endblock content %}
